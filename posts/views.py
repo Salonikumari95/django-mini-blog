@@ -3,13 +3,16 @@ from .models import Post
 from .forms import PostForm
 # Create your views here.
 
+
 def index(request):
     posts = Post.objects.all()
     return render(request, 'posts/home.html', {'posts': posts})
 
+
 def post_detail(request, id):
     post = get_object_or_404(Post, id=id)
     return render(request, 'posts/post_detail.html', {'post': post})
+
 
 def create_post(request):
     if request.method == 'POST':
@@ -21,6 +24,7 @@ def create_post(request):
         form = PostForm()
     return render(request, 'posts/post_form.html', {'form': form})
 
+
 def update_post(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
@@ -31,6 +35,7 @@ def update_post(request, id):
     else:
         form = PostForm(instance=post)
     return render(request, 'posts/post_form.html', {'form': form})
+
 
 def delete_post(request, id):
     post = get_object_or_404(Post, id=id)
